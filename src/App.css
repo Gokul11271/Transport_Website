@@ -1,0 +1,6 @@
+/* App.css — kept minimal since index.css handles everything */
+
+.app-container {
+    position: relative;
+    width: 100vw;
+}

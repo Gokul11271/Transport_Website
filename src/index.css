@@ -1,0 +1,829 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600;800;900&display=swap');
+
+:root {
+    --red: #ff1a1a;
+    --red-dim: rgba(255, 26, 26, 0.15);
+    --white: #ffffff;
+    --black: #000000;
+    --grey: #aaaaaa;
+    --border: rgba(255, 255, 255, 0.08);
+    font-family: 'Inter', system-ui, sans-serif;
+    color-scheme: dark;
+    background-color: var(--black);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    overflow-x: hidden;
+    background-color: var(--black);
+    color: var(--white);
+    scroll-behavior: smooth;
+}
+
+/* ======================== CANVAS ======================== */
+.canvas-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
+
+/* ======================== SECTIONS ======================== */
+.section {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 10vw;
+}
+
+.section-right {
+    align-items: flex-end;
+    padding: 0 10vw;
+}
+
+/* ======================== CONTENT CARDS ======================== */
+.content-card {
+    background: rgba(0, 0, 0, 0.55);
+    border-left: 2px solid var(--red);
+    padding: 3rem;
+    max-width: 580px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    position: relative;
+    transition: all 0.5s ease;
+    animation: cardFadeIn 0.8s ease-out both;
+}
+
+.content-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -2px;
+    width: 2px;
+    height: 0%;
+    background: var(--white);
+    transition: height 0.6s ease;
+}
+
+.content-card:hover::before {
+    height: 100%;
+}
+
+.content-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border: 1px solid var(--border);
+    border-left: none;
+    pointer-events: none;
+}
+
+@keyframes cardFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ======================== TYPOGRAPHY ======================== */
+.badge {
+    color: var(--red);
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    letter-spacing: 4px;
+    font-size: 0.7rem;
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.badge::before {
+    content: "▸";
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
+}
+
+h1 {
+    font-size: clamp(2.2rem, 5.5vw, 5rem);
+    line-height: 0.92;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    letter-spacing: -1px;
+    font-family: 'Orbitron', monospace;
+    background: linear-gradient(135deg, #fff 40%, #aaa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    overflow: hidden;
+    word-break: break-word;
+    hyphens: none;
+}
+
+h2 {
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: 'Orbitron', monospace;
+}
+
+h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--grey);
+    margin-bottom: 2rem;
+    font-weight: 300;
+}
+
+/* ======================== BUTTONS ======================== */
+button {
+    cursor: pointer;
+    border: none;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+    font-size: 0.75rem;
+    font-family: 'Orbitron', monospace;
+}
+
+.cta-group {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.primary-btn {
+    background: var(--red);
+    color: var(--white);
+    padding: 1.1rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+}
+
+.primary-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+}
+
+.primary-btn:hover::after {
+    transform: translateX(0);
+}
+
+.primary-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255, 0, 0, 0.4);
+}
+
+.secondary-btn {
+    background: transparent;
+    color: var(--white);
+    border: 1px solid var(--border);
+    padding: 1.1rem 2.5rem;
+}
+
+.secondary-btn:hover {
+    border-color: var(--red);
+    color: var(--red);
+    transform: translateY(-3px);
+}
+
+/* ======================== SECTION HEADER ======================== */
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+}
+
+/* ======================== FLEET GRID ======================== */
+.bus-grid {
+    display: grid;
+    gap: 0;
+}
+
+.bus-item {
+    padding: 1.2rem 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.bus-item:hover {
+    padding-left: 1rem;
+}
+
+.bus-item:hover .bus-type {
+    color: var(--red);
+}
+
+.bus-type {
+    display: block;
+    font-weight: 800;
+    color: var(--white);
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    font-family: 'Orbitron', monospace;
+    font-size: 0.8rem;
+    transition: color 0.3s;
+}
+
+.bus-item p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #555;
+}
+
+.bus-badge {
+    font-size: 0.6rem;
+    font-family: 'Orbitron', monospace;
+    letter-spacing: 2px;
+    color: var(--red);
+    border: 1px solid rgba(255, 26, 26, 0.3);
+    padding: 0.2rem 0.6rem;
+    white-space: nowrap;
+}
+
+/* ======================== DESTINATIONS ======================== */
+.packages-container {
+    display: grid;
+    gap: 1rem;
+}
+
+.destination-pkg {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
+    padding: 1.3rem 1.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.destination-pkg::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--red);
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+}
+
+.destination-pkg:hover {
+    background: rgba(255, 26, 26, 0.05);
+    border-color: rgba(255, 26, 26, 0.3);
+    transform: translateX(5px);
+}
+
+.destination-pkg:hover::before {
+    transform: scaleY(1);
+}
+
+.pkg-info {
+    flex: 1;
+}
+
+.pkg-info h3 {
+    font-size: 0.85rem;
+    margin-bottom: 0.3rem;
+}
+
+.pkg-info span {
+    font-size: 0.75rem;
+    color: #555;
+}
+
+.pkg-tag {
+    font-size: 0.6rem;
+    color: #ff6666;
+    letter-spacing: 1px;
+    font-family: monospace;
+}
+
+.pkg-price {
+    color: var(--red);
+    font-weight: 900;
+    font-family: 'Orbitron', monospace;
+    font-size: 1.1rem;
+    text-align: right;
+}
+
+.pkg-price small {
+    display: block;
+    font-size: 0.5rem;
+    color: #555;
+    letter-spacing: 1px;
+}
+
+/* ======================== REVIEWS ======================== */
+.reviews-container {
+    display: grid;
+    gap: 1.2rem;
+}
+
+.review-card {
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--red);
+    transition: all 0.3s ease;
+}
+
+.review-card:hover {
+    background: rgba(255, 26, 26, 0.04);
+    transform: translateX(4px);
+}
+
+.review-stars {
+    color: var(--red);
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+}
+
+.review-text {
+    font-size: 0.85rem;
+    color: #888;
+    line-height: 1.6;
+    margin-bottom: 0.8rem;
+}
+
+.reviewer-name {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-family: 'Orbitron', monospace;
+    color: #555;
+}
+
+/* ======================== BOOKING FORM ======================== */
+.booking-form {
+    display: grid;
+    gap: 1rem;
+}
+
+input,
+select {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 1rem 1.2rem;
+    color: white;
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+input:focus,
+select:focus {
+    border-color: var(--red);
+    background: rgba(255, 26, 26, 0.05);
+}
+
+input::placeholder {
+    color: #444;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.booking-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.support-cta {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+    font-size: 0.8rem;
+    color: #555;
+    font-family: 'Orbitron', monospace;
+    letter-spacing: 1px;
+}
+
+/* ======================== HUD NAVIGATION ======================== */
+.hud-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    pointer-events: none;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+}
+
+.hud-nav>* {
+    pointer-events: auto;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo-box {
+    width: 32px;
+    height: 32px;
+    background: var(--red);
+    clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+    transition: transform 0.3s;
+}
+
+.logo-box:hover {
+    transform: skewX(-5deg) scale(1.1);
+}
+
+.logo-text {
+    font-weight: 900;
+    letter-spacing: 6px;
+    font-size: 1rem;
+    font-family: 'Orbitron', monospace;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.nav-links span {
+    font-size: 0.65rem;
+    font-weight: 700;
+    font-family: 'Orbitron', monospace;
+    letter-spacing: 3px;
+    color: rgba(255, 255, 255, 0.35);
+    cursor: pointer;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.nav-links span::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--red);
+    transition: width 0.3s ease;
+}
+
+.nav-links span:hover {
+    color: var(--red);
+}
+
+.nav-links span:hover::after {
+    width: 100%;
+}
+
+.nav-links span.active {
+    color: var(--red);
+}
+
+.nav-links span.active::after {
+    width: 100%;
+}
+
+.book-nav-btn {
+    background: transparent;
+    color: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 0.6rem 1.5rem;
+    font-size: 0.55rem;
+}
+
+.book-nav-btn:hover {
+    background: var(--red);
+    border-color: var(--red);
+}
+
+.audio-toggle {
+    background: transparent;
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: var(--red);
+    transition: all 0.3s ease;
+}
+
+.audio-toggle:hover {
+    background: var(--red);
+    color: white;
+    border-color: var(--red);
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+}
+
+/* ======================== HUD DECORATIONS ======================== */
+.hud-deco {
+    position: fixed;
+    font-family: 'Orbitron', monospace;
+    font-size: 0.55rem;
+    color: rgba(255, 30, 30, 0.4);
+    pointer-events: none;
+    z-index: 50;
+    letter-spacing: 2px;
+    line-height: 2.2;
+}
+
+.top-right {
+    top: 8rem;
+    right: 4rem;
+    text-align: right;
+}
+
+.bottom-left {
+    bottom: 3rem;
+    left: 4rem;
+}
+
+.bottom-right {
+    bottom: 3rem;
+    right: 4rem;
+    text-align: right;
+}
+
+/* ======================== SCROLL INDICATOR ======================== */
+.scroll-indicator {
+    position: fixed;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    color: rgba(255, 255, 255, 0.25);
+    font-size: 0.55rem;
+    letter-spacing: 4px;
+    z-index: 10;
+    font-family: 'Orbitron', monospace;
+    animation: fadeInDelay 2s ease both;
+}
+
+@keyframes fadeInDelay {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.mouse {
+    width: 20px;
+    height: 34px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    position: relative;
+}
+
+.wheel {
+    width: 3px;
+    height: 7px;
+    background: var(--red);
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+    animation: scrollAnim 1.8s infinite ease-in-out;
+}
+
+@keyframes scrollAnim {
+    0% {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, 15px);
+        opacity: 0;
+    }
+}
+
+/* ======================== STAT COUNTERS ======================== */
+.stats-row {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+}
+
+.stat-item {
+    text-align: left;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 900;
+    font-family: 'Orbitron', monospace;
+    color: var(--white);
+    line-height: 1;
+}
+
+.stat-number span {
+    color: var(--red);
+}
+
+.stat-label {
+    font-size: 0.6rem;
+    color: #555;
+    letter-spacing: 2px;
+    font-family: 'Orbitron', monospace;
+    margin-top: 0.3rem;
+}
+
+/* ======================== NAV RIGHT GROUP ======================== */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.hamburger-btn {
+    display: none;
+    background: transparent;
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: var(--red);
+    transition: all 0.3s ease;
+    font-size: 0.75rem;
+}
+
+.hamburger-btn:hover {
+    background: var(--red);
+    color: white;
+    border-color: var(--red);
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+}
+
+/* ======================== MOBILE MENU OVERLAY ======================== */
+.mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding-top: 5rem;
+}
+
+.mobile-menu-inner {
+    background: rgba(10, 0, 0, 0.9);
+    border: 1px solid rgba(255, 26, 26, 0.2);
+    border-right: none;
+    padding: 2.5rem;
+    min-width: 60vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    animation: slideInRight 0.28s ease-out both;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.mobile-nav-link {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    transition: color 0.3s;
+}
+
+.mobile-nav-link:hover {
+    color: var(--red);
+}
+
+/* ======================== RESPONSIVE ======================== */
+@media (max-width: 768px) {
+    .hud-nav {
+        padding: 1.5rem 2rem;
+    }
+
+    .nav-links,
+    .hud-deco {
+        display: none;
+    }
+
+    .hamburger-btn {
+        display: flex;
+    }
+
+    .section,
+    .section-right {
+        padding: 0 6vw;
+    }
+
+    .content-card {
+        padding: 2rem;
+        max-width: 100%;
+    }
+
+    .booking-form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .stats-row {
+        gap: 1.2rem;
+        flex-wrap: wrap;
+    }
+
+    .stat-number {
+        font-size: 1.4rem;
+    }
+}
