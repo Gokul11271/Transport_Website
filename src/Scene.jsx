@@ -29,6 +29,10 @@ function Scene() {
             targetPos.set(-3, 0.5, 4) // Booking: rear quarter
         }
 
+        // Mouse parallax – subtle camera drift based on cursor position
+        targetPos.x += state.mouse.x * 0.3
+        targetPos.y += state.mouse.y * 0.15
+
         camera.position.lerp(targetPos, 0.06)
         camera.lookAt(0, 0.2, 0)
 
