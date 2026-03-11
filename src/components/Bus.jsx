@@ -9,8 +9,7 @@ const bodyMat = new THREE.MeshStandardMaterial({ color: '#0a0f1e', roughness: 0.
 const bodyAccent = new THREE.MeshStandardMaterial({ color: '#091630', roughness: 0.2, metalness: 0.8 })
 const glassMat = new THREE.MeshPhysicalMaterial({ color: '#0a2040', metalness: 0.05, roughness: 0.04, transmission: 0.7, thickness: 0.5, transparent: true, opacity: 0.5 })
 const chromeMat = new THREE.MeshStandardMaterial({ color: '#e0e0e0', roughness: 0.02, metalness: 1.0, envMapIntensity: 5 })
-const redMat = new THREE.MeshStandardMaterial({ color: '#cc0000', emissive: '#880000', emissiveIntensity: 0.6 })
-const orangeMat = new THREE.MeshStandardMaterial({ color: '#ff6600', emissive: '#cc4400', emissiveIntensity: 0.8 })
+// (accent materials embedded inline where needed)
 const glowRed = new THREE.MeshStandardMaterial({ color: '#ff2200', emissive: '#ff0000', emissiveIntensity: 6, toneMapped: false })
 const glowWhite = new THREE.MeshStandardMaterial({ color: '#ffffd0', emissive: '#ffffff', emissiveIntensity: 7, toneMapped: false })
 const glowAmber = new THREE.MeshStandardMaterial({ color: '#ffcc00', emissive: '#ffaa00', emissiveIntensity: 4, toneMapped: false })
@@ -100,8 +99,11 @@ export function Bus() {
     const busRef = useRef()
     const scroll = useScroll()
 
-    // Refs for spinning wheel rims
-    const wheelRefs = useRef(Array.from({ length: 6 }, () => React.createRef()))
+    // Flat mutable ref array for 6 wheel rims
+    const w0 = useRef(); const w1 = useRef(); const w2 = useRef()
+    const w3 = useRef(); const w4 = useRef(); const w5 = useRef()
+    const wheelRefs = useRef(null)
+    if (!wheelRefs.current) wheelRefs.current = [w0, w1, w2, w3, w4, w5]
 
     useFrame(({ clock }) => {
         const t = clock.getElapsedTime()
