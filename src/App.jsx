@@ -265,7 +265,7 @@ function App() {
                                         <div className="content-card">
                                             <div className="badge">ROUTE MASTER TRAVELS · EST. 2012</div>
                                             <h1>Journey<br />Beyond<br />Limits</h1>
-                                            <p>South India's most trusted luxury bus operator. Handcrafted itineraries, expert drivers — every journey a destination.</p>
+                                            <p>South India's most trusted luxury bus operator. Every journey a destination.</p>
                                             <div className="cta-group">
                                                 <button className="primary-btn" onClick={scrollToWebsite}>Explore Now</button>
                                                 <button className="secondary-btn" onClick={() => scrollTo(1)}>View Fleet</button>
@@ -307,17 +307,16 @@ function App() {
                                                 <h2>South India Tours</h2>
                                             </div>
                                             <div className="packages-container">
-                                                {destinations.slice(0, 4).map(d => (
+                                                {destinations.slice(0, 3).map(d => (
                                                     <div className="destination-pkg" key={d.name} onClick={() => scrollTo(4)}>
                                                         <div className="pkg-info">
                                                             <span className="pkg-emoji">{d.img}</span>
                                                             <div>
                                                                 <h3>{d.name}</h3>
-                                                                <span>{d.route}</span>
                                                                 <div className="pkg-tag">{d.days} DAYS / {d.nights} NIGHTS</div>
                                                             </div>
                                                         </div>
-                                                        <div className="pkg-price">{d.price}<small>PER PERSON</small></div>
+                                                        <div className="pkg-price">{d.price}</div>
                                                     </div>
                                                 ))}
                                             </div>
@@ -350,7 +349,7 @@ function App() {
                                                 <Calendar size={28} color="#ff6600" />
                                                 <h2>Book Your Journey</h2>
                                             </div>
-                                            <p>Fill in your details and we'll confirm your seat within 2 hours.</p>
+                                            <p>Quick booking within 2 minutes.</p>
                                             <form className="booking-form" onSubmit={handleBooking}>
                                                 <div className="booking-form-row">
                                                     <input type="text" placeholder="From City" required />
@@ -434,7 +433,7 @@ function App() {
                 </div>
                 <div className="hud-deco bottom-left">
                     <div>© 2025 ROUTE MASTER TRAVELS</div>
-                    <div>SOUTH INDIA SPECIALIST</div>
+                    <div>DEVELOPED BY ECOG CORE TECHNOLOGY</div>
                 </div>
                 <div className="hud-deco bottom-right">
                     <div>LAT: 10.8505° N</div>
@@ -743,7 +742,7 @@ function App() {
                         </div>
                     </div>
                     <div className="footer-bottom">
-                        <span>© 2025 Route Master Travels. All rights reserved.</span>
+                        <span>© 2025 Route Master Travels. Developed by ECOG Core Technology.</span>
                         <span>Crafted with ❤️ in Tamil Nadu</span>
                     </div>
                 </footer>

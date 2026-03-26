@@ -49,28 +49,34 @@ function Scene() {
         const { camera } = state
         const t = s * 5
 
+        // ── MOBILE DETECTION ──
+        const isMobile = window.innerWidth < 768
+        camera.fov = isMobile ? 55 : 42
+        camera.updateProjectionMatrix()
+
         // ── CAMERA POSITIONS PER SECTION ──
         const targetPos = new THREE.Vector3()
         if (t < 1) {
             // Hero: dramatic front-low angle
-            targetPos.set(0, 0.3, 7.0)
+            targetPos.set(0, isMobile ? 0.8 : 0.3, isMobile ? 9.0 : 7.0)
         } else if (t < 2) {
             // Fleet: sweeping right side-angle
-            targetPos.set(5.0, 1.8, 3.5)
+            targetPos.set(isMobile ? 3.5 : 5.0, 1.8, isMobile ? 5.0 : 3.5)
         } else if (t < 3) {
             // Destinations: left wide aerial
-            targetPos.set(-5.5, 2.2, 4.2)
+            targetPos.set(isMobile ? -4.5 : -5.5, 2.2, isMobile ? 5.5 : 4.2)
         } else if (t < 4) {
             // Reviews: overhead 3/4 - show top of bus
-            targetPos.set(1.5, 4.0, 5.0)
+            targetPos.set(1.5, isMobile ? 5.0 : 4.0, isMobile ? 6.5 : 5.0)
         } else {
             // Booking: rear-quarter beauty angle
-            targetPos.set(-3.5, 0.8, 3.8)
+            targetPos.set(isMobile ? -2.5 : -3.5, 0.8, isMobile ? 5.5 : 3.8)
         }
 
-        // Mouse parallax
-        targetPos.x += state.mouse.x * 0.35
-        targetPos.y += state.mouse.y * 0.18
+        // Mouse parallax (reduced for mobile)
+        const parallaxFactor = isMobile ? 0.1 : 0.35
+        targetPos.x += state.mouse.x * parallaxFactor
+        targetPos.y += state.mouse.y * (parallaxFactor * 0.5)
 
         camera.position.lerp(targetPos, 0.055)
         camera.lookAt(0, 0.1, 0)
@@ -137,11 +143,11 @@ function Scene() {
             {/* Front accent - warm white */}
             <spotLight position={[12, 0, 0]} angle={0.15} penumbra={1} intensity={3} color="#fff5e0" />
 
-            <Stars radius={150} depth={80} count={10000} factor={4} saturation={0} fade speed={0.8} />
+            <Stars radius={150} depth={80} count={window.innerWidth < 768 ? 3000 : 10000} factor={4} saturation={0} fade speed={0.8} />
 
             {/* Sparkle dust around bus */}
             <Sparkles
-                count={80}
+                count={window.innerWidth < 768 ? 30 : 80}
                 scale={[12, 4, 5]}
                 size={1.5}
                 speed={0.4}

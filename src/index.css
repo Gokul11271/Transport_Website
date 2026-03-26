@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600;800;900&family=Rajdhani:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@300;400;600;800;900&family=Rajdhani:wght@400;600;700&display=swap');
 
 :root {
     --red: #ff1a1a;
@@ -10,7 +10,7 @@
     --dark: #050505;
     --border: rgba(255, 255, 255, 0.08);
     --border-o: rgba(255, 102, 0, 0.2);
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'Outfit', system-ui, sans-serif;
     color-scheme: dark;
     background-color: var(--black);
 }
@@ -218,7 +218,7 @@ h2 {
 }
 
 h3 {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 0.95rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -2084,6 +2084,7 @@ select option {
     .company-story {
         grid-template-columns: 1fr;
         gap: 2rem;
+        padding: 2.5rem;
     }
 
     .booking-container {
@@ -2093,6 +2094,12 @@ select option {
 
     .footer-top {
         grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .content-card {
+        max-width: 480px;
+        padding: 2rem;
     }
 }
 
@@ -2104,7 +2111,9 @@ select option {
     .nav-links,
     .hud-deco,
     .section-dots,
-    .enter-website-btn {
+    .enter-website-btn,
+    .scroll-indicator,
+    .site-nav-links {
         display: none;
     }
 
@@ -2113,19 +2122,44 @@ select option {
     }
 
     .section {
-        padding: 0 5vw;
+        padding: 0 1.5rem;
+        align-items: center;
+        text-align: center;
+    }
+
+    .section-right {
+        align-items: center;
+        padding: 0 1.5rem;
+    }
+
+    .content-card {
+        max-width: 100%;
+        width: 90vw;
+        padding: 1.5rem;
+        border-left: none;
+        border-top: 2px solid var(--orange);
     }
 
     .site-nav {
         padding: 1rem 1.5rem;
     }
 
-    .site-nav-links {
-        display: none;
+    .site-hero {
+        padding: 6rem 1.5rem 3rem;
+        text-align: center;
     }
 
-    .site-hero {
-        padding: 6rem 2rem 3rem;
+    .site-hero-sub {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .site-hero-cta {
+        justify-content: center;
+    }
+
+    .site-hero-stats {
+        justify-content: center;
     }
 
     .site-container {
@@ -2158,9 +2192,27 @@ select option {
     .story-numbers {
         grid-template-columns: 1fr 1fr;
     }
+
+    .section-header {
+        justify-content: center;
+    }
+
+    .stats-row {
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .cta-group {
+        justify-content: center;
+    }
 }
 
 @media (max-width: 480px) {
+    h1 { font-size: 2.5rem; }
+    .content-card { padding: 1.2rem; }
+    .pkg-price { font-size: 0.85rem; }
+    .bus-stat-num { font-size: 0.9rem; }
+
     .fleet-spinner-grid {
         grid-template-columns: 1fr;
     }
